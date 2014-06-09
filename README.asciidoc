@@ -1,7 +1,7 @@
 == as
 :idprefix: id_ 
-The as addon simplify the interaction with application serveur like JBoss AS7
-This addon provides *standalone* functionality, and *exports services* for use in other addons. 
+The as addon simplify the interaction with any application serveur.
+This addon provides *exports services* for use in other addons. The as addon enables the creation of agnostic application server commands and wizards that run in any API compliant application server addon.
 
 === Depends on
 [options="header"]
@@ -13,18 +13,32 @@ This addon provides *standalone* functionality, and *exports services* for use i
 |no
 
 |projects
-|yes
+|no
 |no
 
 |org.jboss.forge.furnace.container:cdi
 |no
 |no
 
+|as-spi
+|yes
+|no
+
+|as-api
+|no
+|no
+
+|as-impl
+|no
+|no
+
+
 |===
 
 
 == Setup
 This Addon requires the following installation steps.
+
 === Add configuration to pom.xml 
 To use this addon, you must add it as a dependency in the *pom.xml* of your `forge-addon` classified artifact:
 (Make sure the dependency is put all the way to the left, and uses 3 spaces for indentation of GAV)
@@ -37,3 +51,20 @@ To use this addon, you must add it as a dependency in the *pom.xml* of your `for
    <version>${version}</version>
 </dependency>
 ----
+
+
+== Features
+
+Service to provide application server provider::
+Implement an *Application Server* connector to provide management operations create a `Provider` class.
+
++
+[source,java]
+----
+public class MyAppServerProvider extends AbstractFacet<Project> implements ApplicationServerProvider
+{
+...
+}
+----
+
+ 

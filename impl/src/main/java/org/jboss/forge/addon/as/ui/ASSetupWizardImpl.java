@@ -52,7 +52,8 @@ public class ASSetupWizardImpl extends AbstractASWizardImpl implements ASSetupWi
    @Override
    public boolean isEnabled(UIContext context)
    {
-      return true;
+	   Imported<ApplicationServerProvider> providerInstances = registry.getServices(ApplicationServerProvider.class);
+	   return !providerInstances.isUnsatisfied();
    }
    
    @Inject
@@ -62,7 +63,6 @@ public class ASSetupWizardImpl extends AbstractASWizardImpl implements ASSetupWi
    @Override
    public void initializeUI(UIBuilder builder) throws Exception
    {
-
       Imported<ApplicationServerProvider> providerInstances = registry.getServices(ApplicationServerProvider.class);
       List<ApplicationServerProvider> providerList = new ArrayList<ApplicationServerProvider>();
       for (ApplicationServerProvider provider : providerInstances)
