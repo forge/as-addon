@@ -9,7 +9,7 @@ package org.jboss.forge.addon.as.ui;
 import org.jboss.forge.addon.ui.wizard.UIWizard;
 
 /**
- * Deploy an application in the application server command.
+ * Command to undeploy an application in the application server.
  * 
  * @author Jeremie Lagarde
  */
