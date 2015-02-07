@@ -37,6 +37,10 @@ import org.jboss.forge.furnace.services.Imported;
 public class ASSetupWizardImpl extends AbstractASWizardImpl implements ASSetupWizard
 {
 
+   @Inject
+   @WithAttributes(label = "AS type", required = true)
+   private UISelectOne<ApplicationServerProvider> server;
+
    @Override
    protected String getName()
    {
@@ -53,13 +57,16 @@ public class ASSetupWizardImpl extends AbstractASWizardImpl implements ASSetupWi
    public boolean isEnabled(UIContext context)
    {
 	   Imported<ApplicationServerProvider> providerInstances = registry.getServices(ApplicationServerProvider.class);
-	   return !providerInstances.isUnsatisfied();
+	   return !providerInstances.isUnsatisfied() && super.isEnabled(context);
+	   
    }
    
-   @Inject
-   @WithAttributes(label = "AS type", required = true)
-   private UISelectOne<ApplicationServerProvider> server;
-
+   @Override
+   protected boolean isASInstalledMandatory()
+   {
+      return false;
+   }
+   
    @Override
    public void initializeUI(UIBuilder builder) throws Exception
    {
