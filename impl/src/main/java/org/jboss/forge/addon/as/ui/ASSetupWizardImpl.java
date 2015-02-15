@@ -16,6 +16,7 @@ import org.jboss.forge.addon.configuration.Configuration;
 import org.jboss.forge.addon.configuration.facets.ConfigurationFacet;
 import org.jboss.forge.addon.convert.Converter;
 import org.jboss.forge.addon.projects.Project;
+import org.jboss.forge.addon.resource.DirectoryResource;
 import org.jboss.forge.addon.ui.command.UICommand;
 import org.jboss.forge.addon.ui.context.UIBuilder;
 import org.jboss.forge.addon.ui.context.UIContext;
@@ -76,7 +77,7 @@ public class ASSetupWizardImpl extends AbstractASWizardImpl implements ASSetupWi
       {
          providerList.add(provider);
       }
-      server.setDefaultValue(providerList.get(0));
+      server.setDefaultValue((ApplicationServerProvider) null);
       server.setValueChoices(providerList);
       server.setItemLabelConverter(new Converter<ApplicationServerProvider, String>()
       {
@@ -123,8 +124,11 @@ public class ASSetupWizardImpl extends AbstractASWizardImpl implements ASSetupWi
    protected Result execute(ApplicationServerProvider provider, UIContext context) throws Exception
    {
       provider.setup(context);
-      provider.install(context);
-      return Results.success("The applicaion server was setup successfully.");      
+      DirectoryResource installDir = provider.install(context);
+      if(installDir != null && installDir.exists())
+         return Results.success("The applicaion server was setup successfully.");
+      else
+         return Results.fail("Unable to install the application server.");
    }
 
 }
