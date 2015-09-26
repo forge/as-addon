@@ -13,8 +13,8 @@
     <module>spi</module>
   </modules>
   <properties>
-    <version.forge>2.16.0.Final</version.forge>
-    <version.furnace>2.16.0.Final</version.furnace>
+    <version.forge>2.19.2.Final</version.forge>
+    <version.furnace>2.22.0.Final</version.furnace>
   </properties>
   <dependencyManagement>
     <dependencies>
