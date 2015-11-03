@@ -1,5 +1,8 @@
-== as
+== Application Server addon
 :idprefix: id_ 
+
+image:https://travis-ci.org/forge/as-addon.svg?branch=master["Build Status", link="https://travis-ci.org/forge/as-addon"]
+
 The as addon simplify the interaction with any application serveur.
 This addon provides *exports services* for use in other addons. The as addon enables the creation of agnostic application server commands and wizards that run in any API compliant application server addon.
 
